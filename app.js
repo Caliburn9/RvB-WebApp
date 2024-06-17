@@ -1,14 +1,16 @@
+var team;
 
 function assignTeam() {
-    const team = Math.random() < 0.5 ? 'Red' : 'Blue';
-    return team;
+    const t = Math.random() < 0.5 ? 'Red' : 'Blue';
+    return t;
 }
 
 function updateTeamText() {
     const teamText = document.getElementById('Team');
-    const userTeam = assignTeam();
-    teamText.textContent = `You are in the ${userTeam} team!`;
+    teamText.textContent = `You are in the ${team} team!`;
 }
+
+team = assignTeam();
 
 // Call updateTeamText when the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function() {
