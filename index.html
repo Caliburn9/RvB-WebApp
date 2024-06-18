@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Red Versus Blue</title>
+    <title>RvB</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id = "Game">
-        <div id = "TeamBoard">
-            <p id="Team">You are in the waiting room...</p>
-            <p id="Progress">Tie</p>
+    <div id = "game">
+        <div id = "teamboard">
             <!-- This is where the user can see which team they are a part of -->
             <!-- and which team is winning -->
+            <p id="teamtext">You are in the waiting room...</p>
+            <p id="progress">Tie</p>
+            <p id="hint">Psst... click the screen!</p>
         </div>
-        <div id = "PlayScreen">
+        <div id = "playscreen" onclick="updateScore()">
             <!-- This is the part of the page that will be split into two -->
             <!-- One side for the Red Team and the other for the Blue Team -->
-            <div id = "RedTeam" class="team"></div>
-            <div id = "BlueTeam" class="team"></div>
+            <div id = "redteam"></div>
+            <div id = "blueteam"></div>
         </div>
     </div>
     <script src="app.js"></script>
