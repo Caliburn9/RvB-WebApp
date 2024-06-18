@@ -1,7 +1,7 @@
 var team;
 var redScore = 1;
 var blueScore = 1;
-const serverUrl = "http://localhost:3000"; // replace with server url if needed
+const serverUrl = window.location.origin; // replace with server url if needed
 
 function assignTeam() {
     const t = Math.random() < 0.5 ? 'Red' : 'Blue';
@@ -19,8 +19,6 @@ function updateTeamText() {
     }
 }
 
-team = assignTeam();
-
 function updateScore() {
     const url = `${serverUrl}/updateScore?team=${team}`;
 
@@ -35,6 +33,19 @@ function updateScore() {
             .catch(error => console.error("Error updating score:", error));
 }
 
+function fetchScore() {
+    const url = `${serverUrl}/score`;
+
+    fetch(url)
+            .then(response => response.json)
+            .then(data => {
+                redScore = data.redScore;
+                blueScore = data.blueScore;
+                updatePlayScreen(redScore, blueScore);
+            })
+            .catch(error => console.error("Error fetching scores:", error));
+}
+
 function updatePlayScreen(rS, bS) {
     const redBox = document.getElementById("redteam");
     const blueBox = document.getElementById("blueteam");
@@ -44,5 +55,8 @@ function updatePlayScreen(rS, bS) {
 
 // Call updateTeamText when the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function() {
+    team = assignTeam();
     updateTeamText();
+    fetchScore();
+    setInterval(fetchScore, 2000);
 });
